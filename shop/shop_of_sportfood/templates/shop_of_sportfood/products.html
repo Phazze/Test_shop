@@ -1,0 +1,53 @@
+{% extends 'shop_of_sportfood/base.html' %}
+
+{% block title %}
+Продукция
+{% endblock %}
+
+{% block content %}
+<!--        <select name="Выбрать категорию">-->
+<!--                <option>Все категории</option>-->
+<!--            {% for b in category %}-->
+<!--            <option value="{{ b.name }}">{{ b.name }}</option>-->
+<!--            {% endfor %}-->
+<!--             {% if cat_selected == 0 %}-->
+<!--                <a>Все категории</a>-->
+<!--             {% else %}-->
+<!--                {% for p in category %}-->
+<!--             {% if cat_selected == p.pk %}-->
+<!--                <a href="{{ p.get_absolute_url }}">{{ p.name }}</a>-->
+<!--            {% endif %}-->
+<!--        {% endfor %}-->
+<!--    {% endif %}-->
+<!--            </select>-->
+
+{% if cat_selected == 0 %}
+    <li class="selected">Все категории</li>
+{% else %}
+    <li><a href="{% url 'products' %}">Все категории</a></li>
+{% endif %}
+
+{% for p in category %}
+    {% if p.pk == cat_selected %}
+        <li class="selected">{{ p.name }}</li>
+    {% else %}
+        <li><a href="{{ p.get_absolute_url }}">{{ p.name }}</a></li>
+    {% endif %}
+{% endfor %}
+
+
+    {% for i in product %}
+        <li>
+            <img src="{{ i.photo.url }}" width="150" height="150">
+        <h2>{{ i.name }}</h2>
+<!--        <p>{{ i.description }}</p>-->
+<!--        <p>{{ i.author }}</p>-->
+        <p>{{ i.price }} рублей</p>
+<!--        <p>{{ i.cat }}</p>-->
+        <button type="submit" class="btn btn-success"><a class ="me-3 py-2 text-dark text-decoration-none" href="{{ i.get_absolute_url }}">Посмотреть товар</a></button>
+        <hr>
+        </li>
+
+    {% endfor %}
+
+{% endblock %}

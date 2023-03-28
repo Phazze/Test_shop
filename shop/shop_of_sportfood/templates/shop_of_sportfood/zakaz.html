@@ -1,0 +1,20 @@
+{% extends 'shop_of_sportfood/base.html' %}
+
+{% block title %}
+Заказ
+{% endblock %}
+
+{% block content %}
+    <h1>Добавить продукцию</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.name }}<br>
+        {{ form.description }}<br>
+        {{ form.price }}<br>
+        {{ form.photo }}<br>
+        {{ form.author }}<br>
+        {{ form.cat }}<br>
+        <button type="submit" class="btn btn-success"> Добавить товар </button>
+        <span>{{ error }}</span>
+    </form>
+{% endblock %}

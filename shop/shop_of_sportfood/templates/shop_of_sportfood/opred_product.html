@@ -1,0 +1,20 @@
+{% extends 'shop_of_sportfood/base.html' %}
+
+{% block title %}
+Определенынй товар
+{% endblock %}
+
+{% block content %}
+    {% for i in product %}
+        <li>
+        <h2>{{ i.name }}</h2>
+        <p>{{ i.description }}</p>
+        <img src="{{ i.photo }}">
+        <p>{{ i.author }}</p>
+        <p>{{ i.price }}</p>
+        <p>{{ i.cat }}</p>
+        <button type="submit" class="btn btn-success"><a class ="me-3 py-2 text-dark text-decoration-none" href="{{ i.get_absolute_url }}">Посмотреть товар</a></button>
+        <hr>
+        </li>
+    {% endfor %}
+{% endblock %}
