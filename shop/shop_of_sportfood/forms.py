@@ -1,10 +1,12 @@
 from .models import Products
-from django.forms import ModelForm, TextInput, Textarea,  FileInput, NumberInput, Select
+from django.forms import ModelForm , TextInput, Textarea,  FileInput, NumberInput, Select
+# from django.forms import ModelForm
 
 
 class NewProducts(ModelForm):
     class Meta:
         model = Products
+        # fields = '__all__'
         fields = ['name', 'description', 'price', 'photo', 'author', 'cat']
         widgets = {
             "name": TextInput(attrs={
@@ -30,5 +32,4 @@ class NewProducts(ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Введите категорию'
             })
-        }
-
+         }

@@ -23,15 +23,15 @@ def zakaz(request):
     error = ''
     if request.method == "POST":
         form = NewProducts(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('products')
-        else:
-            error = "Form is uncorrect"
+        # if form.is_valid():
+        form.save()
+        return redirect('products')
+        # else:
+        #     error = "Form is uncorrect"
     form = NewProducts()
     contex = {
         'form': form,
-        'error': error
+        # 'error': error
     }
     return render(request, 'shop_of_sportfood/zakaz.html', contex)
 
@@ -41,7 +41,12 @@ def register(request):
 
 
 def show_product(request, product_id):
-    return HttpResponse(f"Отображение статьи с id = {product_id}")
+    product = Products.objects.all()
+    contex = {
+        'product': product,
+        'product_id': product_id,
+    }
+    return render(request, 'shop_of_sportfood/opred_product.html', contex)
 
 
 def show_category(request, cat_id):

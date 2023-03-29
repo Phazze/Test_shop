@@ -6,15 +6,17 @@
 
 {% block content %}
     {% for i in product %}
-        <li>
-        <h2>{{ i.name }}</h2>
-        <p>{{ i.description }}</p>
-        <img src="{{ i.photo }}">
-        <p>{{ i.author }}</p>
-        <p>{{ i.price }}</p>
-        <p>{{ i.cat }}</p>
-        <button type="submit" class="btn btn-success"><a class ="me-3 py-2 text-dark text-decoration-none" href="{{ i.get_absolute_url }}">Посмотреть товар</a></button>
-        <hr>
-        </li>
+        {% if i.pk == product_id %}
+            <li>
+            <img src="{{ i.photo.url}}" height="300" width="300">
+            <h2>{{ i.name }}</h2>
+            <p>{{ i.description }}</p>
+            <p>{{ i.author }}</p>
+            <p>{{ i.price }} рублей</p>
+            <p>{{ i.cat }}</p>
+             <button type="submit" class="btn btn-success"><a class ="me-3 py-2 text-dark text-decoration-none" href="{% url 'products' %}">Вернуться назад</a></button>
+            <hr>
+            </li>
+        {% endif %}
     {% endfor %}
 {% endblock %}
