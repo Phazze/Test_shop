@@ -6,4 +6,8 @@
 
 {% block content %}
     <h1>Главная страница</h1>
+    <p>Если хочешь быть таким же как он, то тренируйся и работай над собой</p>
+    {% for i in picture %}
+        <img src="{{ i.image.url }}" width="700" height="700" >
+    {% endfor %}
 {% endblock %}

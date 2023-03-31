@@ -36,3 +36,11 @@ class Products(models.Model):
     class Meta:
         verbose_name = 'Продукты'
         verbose_name_plural = 'Продукты'
+
+
+class Pictures(models.Model):
+    image = models.ImageField(upload_to='photos/%Y/%m/%d/')
+
+    class Meta:
+        verbose_name = 'Изображения'
+        verbose_name_plural = 'Изображения'

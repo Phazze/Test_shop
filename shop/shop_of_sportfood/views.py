@@ -4,8 +4,11 @@ from .forms import NewProducts
 
 
 def main(request):
-    posts = Products.objects.all()
-    return render(request, 'shop_of_sportfood/main.html', {'posts': posts})
+    picture = Pictures.objects.all()
+    contex = {
+        'picture': picture,
+    }
+    return render(request, 'shop_of_sportfood/main.html', contex)
 
 
 def products(request):
@@ -20,15 +23,19 @@ def products(request):
 
 
 def zakaz(request):
-    error = ''
+    # error = ''
     if request.method == "POST":
-        form = NewProducts(request.POST)
-        # if form.is_valid():
-        form.save()
-        return redirect('products')
-        # else:
-        #     error = "Form is uncorrect"
-    form = NewProducts()
+        form = NewProducts(request.POST, request.FILES)
+        if form.is_valid():
+            try:
+                Products.objects.create(**form.cleaned_data)
+                return redirect('products')
+
+            except:
+                form.add_error(None, "Ошибка добавления поста")
+    else:
+        form = NewProducts()
+
     contex = {
         'form': form,
         # 'error': error

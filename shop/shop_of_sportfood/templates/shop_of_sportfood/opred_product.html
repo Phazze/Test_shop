@@ -8,7 +8,9 @@
     {% for i in product %}
         {% if i.pk == product_id %}
             <li>
+            {% if i.photo %}
             <img src="{{ i.photo.url}}" height="300" width="300">
+            {% endif %}
             <h2>{{ i.name }}</h2>
             <p>{{ i.description }}</p>
             <p>{{ i.author }}</p>

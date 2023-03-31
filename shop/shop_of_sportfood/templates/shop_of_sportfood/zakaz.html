@@ -8,12 +8,13 @@
     <h1>Добавить продукцию</h1>
     <form method="POST">
         {% csrf_token %}
-        {{ form.name }}<br>
-        {{ form.description }}<br>
-        {{ form.price }}<br>
-        {{ form.photo }}<br>
-        {{ form.author }}<br>
-        {{ form.cat }}<br>
+<!--        {{ form.name }}<br>-->
+<!--        {{ form.description }}<br>-->
+<!--        {{ form.price }}<br>-->
+<!--        {{ form.photo }}<br>-->
+<!--        {{ form.author }}<br>-->
+<!--        {{ form.cat }}<br>-->
+        {{ form.as_p }}
         <button type="submit" class="btn btn-success"> Добавить товар </button>
 <!--        <span>{{ error }}</span>-->
     </form>

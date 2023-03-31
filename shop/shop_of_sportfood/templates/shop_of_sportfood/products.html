@@ -38,7 +38,9 @@
 
     {% for i in product %}
         <li>
-            <img src="{{ i.photo.url }}" width="150" height="150">
+            {% if i.photo %}
+                <img src="{{ i.photo.url }}" width="150" height="150">
+            {% endif %}
         <h2>{{ i.name }}</h2>
 <!--        <p>{{ i.description }}</p>-->
 <!--        <p>{{ i.author }}</p>-->
