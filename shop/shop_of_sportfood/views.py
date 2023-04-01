@@ -30,6 +30,7 @@ class AddProduct(LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('home')
     raise_exception = True
 
+
 def register(request):
     return render(request, 'shop_of_sportfood/register.html')
 
