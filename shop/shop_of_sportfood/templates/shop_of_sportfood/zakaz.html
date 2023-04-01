@@ -6,7 +6,7 @@
 
 {% block content %}
     <h1>Добавить продукцию</h1>
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 <!--        {{ form.name }}<br>-->
 <!--        {{ form.description }}<br>-->

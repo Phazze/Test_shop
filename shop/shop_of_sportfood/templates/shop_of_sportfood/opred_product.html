@@ -1,24 +1,19 @@
 {% extends 'shop_of_sportfood/base.html' %}
 
 {% block title %}
-Определенынй товар
+{{ product.name }}
 {% endblock %}
 
 {% block content %}
-    {% for i in product %}
-        {% if i.pk == product_id %}
-            <li>
-            {% if i.photo %}
-            <img src="{{ i.photo.url}}" height="300" width="300">
+<h1>{{ product.name }} </h1>
+
+            {% if product.photo %}
+            <p><img src="{{ product.photo.url }}" height="300" width="300"></p>
             {% endif %}
-            <h2>{{ i.name }}</h2>
-            <p>{{ i.description }}</p>
-            <p>{{ i.author }}</p>
-            <p>{{ i.price }} рублей</p>
-            <p>{{ i.cat }}</p>
+            <p>{{ product.description }}</p>
+            <p>{{ product.author }}</p>
+            <p>{{ product.price }} рублей</p>
+            <p>{{ product.cat }}</p>
              <button type="submit" class="btn btn-success"><a class ="me-3 py-2 text-dark text-decoration-none" href="{% url 'products' %}">Вернуться назад</a></button>
-            <hr>
-            </li>
-        {% endif %}
-    {% endfor %}
+
 {% endblock %}

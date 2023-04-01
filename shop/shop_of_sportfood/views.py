@@ -1,14 +1,23 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.http import HttpResponseNotFound, Http404
+from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
+from django.views.generic import CreateView, ListView
+
 from .models import *
 from .forms import NewProducts
 
 
-def main(request):
-    picture = Pictures.objects.all()
-    contex = {
-        'picture': picture,
-    }
-    return render(request, 'shop_of_sportfood/main.html', contex)
+class ShopHome(ListView):
+    model = Pictures
+    template_name = 'shop_of_sportfood/main.html'
+    context_object_name = 'picture'
+
+
+# def main(request):
+#     picture = Pictures.objects.all()
+#     contex = {
+#         'picture': picture,
+#     }
+#     return render(request, 'shop_of_sportfood/main.html', contex)
 
 
 def products(request):
@@ -27,12 +36,9 @@ def zakaz(request):
     if request.method == "POST":
         form = NewProducts(request.POST, request.FILES)
         if form.is_valid():
-            try:
-                Products.objects.create(**form.cleaned_data)
-                return redirect('products')
+            form.save()
 
-            except:
-                form.add_error(None, "Ошибка добавления поста")
+            return redirect('products')
     else:
         form = NewProducts()
 
@@ -47,11 +53,18 @@ def register(request):
     return render(request, 'shop_of_sportfood/register.html')
 
 
-def show_product(request, product_id):
-    product = Products.objects.all()
+# class DataMixin:
+#     pass
+
+
+# class RegisterUser(DataMixin, CreateView):
+
+
+def show_product(request, product_slug):
+    product = get_object_or_404(Products, slug=product_slug)
     contex = {
         'product': product,
-        'product_id': product_id,
+        'product_id': product_slug,
     }
     return render(request, 'shop_of_sportfood/opred_product.html', contex)
 
@@ -59,6 +72,10 @@ def show_product(request, product_id):
 def show_category(request, cat_id):
     title = Category.objects.all()
     product = Products.objects.filter(cat_id=cat_id)
+
+    if len(product) == 0:
+        raise Http404()
+
     contex = {
         'category': title,
         'product': product,
@@ -73,3 +90,7 @@ def about_us(request):
 
 def map(request):
     return render(request, 'shop_of_sportfood/map.html')
+
+
+def pageNotFound(request, exception):
+    return HttpResponseNotFound("<h1> Page not found.</h1>")
