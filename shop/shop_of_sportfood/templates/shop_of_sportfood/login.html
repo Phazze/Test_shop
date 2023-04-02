@@ -1,0 +1,14 @@
+{% extends 'shop_of_sportfood/base.html' %}
+
+{% block title %}
+Вход
+{% endblock %}
+
+
+{% block content %}
+<form method="POST">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="btn btn-success">Войти</button>
+</form>
+{% endblock %}
